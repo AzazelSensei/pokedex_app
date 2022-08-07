@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../cubit/pokedex_list_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,6 +25,15 @@ class _PokedexListScreenState extends State<PokedexListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          // Status bar color
+          statusBarColor: Colors.transparent,
+
+          // Status bar brightness (optional)
+          statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+          statusBarBrightness: Brightness.light, // For iOS (dark icons)
+        ),
         title: const Text('Pokedex List'),
       ),
       body: BlocBuilder<PokedexListCubit, PokedexListState>(

@@ -78,602 +78,83 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen> {
           const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
       child: Column(
         children: [
-          Card(
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                borderRadius: const BorderRadius.all(Radius.circular(12)),
-              ),
-              elevation: 2,
-              child: Column(
-                children: [
-                  const SizedBox(height: 10),
-                  const Text(
-                    "Abilities",
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 10),
-                  const Divider(
-                    height: 1,
-                    color: Colors.black54,
-                  ),
-                  const SizedBox(height: 10),
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: state.detail.abilities?.length,
-                    itemBuilder: (context, index) => Center(
-                      child: Text(
-                        state.detail.abilities![index].ability!.name!
-                            .toTitleCase(),
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                ],
-              )),
-          Card(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-            ),
-            elevation: 2,
-            child: Column(
-              children: [
-                const SizedBox(height: 10),
-                const Text(
-                  "Forms",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 10),
-                const Divider(
-                  height: 1,
-                  color: Colors.black54,
-                ),
-                const SizedBox(height: 10),
-                ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: state.detail.forms?.length,
-                  itemBuilder: (context, index) => Center(
-                    child: Text(
-                      state.detail.forms![index].name!.toTitleCase(),
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-              ],
-            ),
+          PropertiesCard(
+            title: "Abilities",
+            contentlist: state.detail.abilities!
+                .map((e) => e.ability?.name ?? "")
+                .toList(),
           ),
-          Card(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-            ),
-            elevation: 2,
-            child: Column(
-              children: [
-                const SizedBox(height: 10),
-                const Text(
-                  "Base Experience",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 10),
-                const Divider(
-                  height: 1,
-                  color: Colors.black54,
-                ),
-                const SizedBox(height: 10),
-                ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: 1,
-                  itemBuilder: (context, index) => Center(
-                    child: Text(
-                      state.detail.baseExperience.toString(),
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-              ],
-            ),
+          PropertiesCard(
+            title: "Forms",
+            contentlist: state.detail.forms!.map((e) => e.name ?? "").toList(),
           ),
-          Card(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-            ),
-            elevation: 2,
-            child: Column(
-              children: [
-                const SizedBox(height: 10),
-                const Text(
-                  "Versions",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 10),
-                const Divider(
-                  height: 1,
-                  color: Colors.black54,
-                ),
-                const SizedBox(height: 10),
-                ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: state.detail.species!.name!.length,
-                  itemBuilder: (context, index) => Center(
-                    child: Text(
-                      state.detail.gameIndices![index].version!.name!
-                          .toTitleCase(),
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-              ],
-            ),
+          PropertiesCard(
+            title: "Base Experience",
+            contentlist: [state.detail.baseExperience.toString()],
           ),
-          Card(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-            ),
-            elevation: 2,
-            child: Column(
-              children: [
-                const SizedBox(height: 10),
-                const Text(
-                  "Height",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 10),
-                const Divider(
-                  height: 1,
-                  color: Colors.black54,
-                ),
-                const SizedBox(height: 10),
-                ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: 1,
-                  itemBuilder: (context, index) => Center(
-                    child: Text(
-                      state.detail.height.toString().toTitleCase(),
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-              ],
-            ),
+          PropertiesCard(
+            title: "Versions",
+            contentlist: state.detail.gameIndices!
+                .map((e) => e.version?.name ?? "")
+                .toList(),
           ),
-          Card(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-            ),
-            elevation: 2,
-            child: Column(
-              children: [
-                const SizedBox(height: 10),
-                const Text(
-                  "ID",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 10),
-                const Divider(
-                  height: 1,
-                  color: Colors.black54,
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  state.detail.id.toString().toTitleCase(),
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-                const SizedBox(height: 10),
-              ],
-            ),
+          PropertiesCard(
+            title: "Height",
+            contentlist: [state.detail.height.toString()],
           ),
-          // Card(
-          //   margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-          //   shape: RoundedRectangleBorder(
-          //     side: BorderSide(
-          //       color: Theme.of(context).colorScheme.outline,
-          //     ),
-          //     borderRadius: const BorderRadius.all(Radius.circular(12)),
-          //   ),
-          //   elevation: 2,
-          //   child: Column(
-          //     children: [
-          //       const SizedBox(height: 10),
-          //       const Text(
-          //         "Held Items",
-          //         style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-          //       ),
-          //       const SizedBox(height: 10),
-          //       const Divider(
-          //         height: 1,
-          //         color: Colors.black54,
-          //       ),
-          //       const SizedBox(height: 10),
-          //       ListView.builder(
-          //         physics: const NeverScrollableScrollPhysics(),
-          //         shrinkWrap: true,
-          //         itemCount: state.detail.heldItems?.length,
-          //         itemBuilder: (context, index) => SizedBox(
-          //           height: 200,
-          //           child: Center(
-          //             child: Text(
-          //               state.detail.heldItems![index] ,
-          //               style: Theme.of(context).textTheme.headline6,
-          //             ),
-          //           ),
-          //         ),
-          //       ),
-          //       const SizedBox(height: 10),
-          //     ],
-          //   ),
-          // ),
-          Card(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-            ),
-            elevation: 2,
-            child: Column(
-              children: [
-                const SizedBox(height: 10),
-                const Text(
-                  "Is Default",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 10),
-                const Divider(
-                  height: 1,
-                  color: Colors.black54,
-                ),
-                const SizedBox(height: 10),
-                ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: 1,
-                  itemBuilder: (context, index) => Center(
-                    child: Text(
-                      //eğer true ise şunu yaz
-
-                      state.detail.isDefault.toString().toTitleCase(),
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-              ],
-            ),
+          PropertiesCard(
+            title: "ID",
+            contentlist: [state.detail.id.toString()],
           ),
-          Card(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-            ),
-            elevation: 2,
-            child: Column(
-              children: [
-                const SizedBox(height: 10),
-                const Text(
-                  "Moves",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 10),
-                const Divider(
-                  height: 1,
-                  color: Colors.black54,
-                ),
-                const SizedBox(height: 10),
-                if (state.detail.moves!.length <= 5)
-                  ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: state.detail.moves!.length,
-                      itemBuilder: (context, index) => Center(
-                            child: Text(
-                              state.detail.moves![index].move!.name
-                                  .toString()
-                                  .toTitleCase(),
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                          ))
-                else if (state.detail.moves!.length >= 5)
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: 5,
-                    itemBuilder: (context, index) => Center(
-                      child: Text(
-                        //eğer true ise şunu yaz
-
-                        state.detail.moves![index].move!.name
-                            .toString()
-                            .toTitleCase(),
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
-                    ),
-                  ),
-                const SizedBox(height: 10),
-              ],
-            ),
+          PropertiesCard(
+            title: "Is Default",
+            contentlist: [state.detail.isDefault.toString()],
           ),
-          Card(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-            ),
-            elevation: 2,
-            child: Column(
-              children: [
-                const SizedBox(height: 10),
-                const Text(
-                  "Order",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 10),
-                const Divider(
-                  height: 1,
-                  color: Colors.black54,
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  //eğer null dönerse şunu yap
-                  state.detail.order.toString().toTitleCase(),
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-                const SizedBox(height: 10),
-              ],
-            ),
+          PropertiesCard(
+            title: "Moves",
+            contentlist:
+                state.detail.moves!.map((e) => e.move?.name ?? "").toList(),
           ),
-          Card(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-            ),
-            elevation: 2,
-            child: Column(
-              children: [
-                const SizedBox(height: 10),
-                const Text(
-                  "Past Types",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 10),
-                const Divider(
-                  height: 1,
-                  color: Colors.black54,
-                ),
-                const SizedBox(height: 10),
-                ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: state.detail.pastTypes!.length,
-                  itemBuilder: (context, index) => Center(
-                    child: Text(
-                      //eğer true ise şunu yaz
-
-                      state.detail.pastTypes![index],
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-              ],
-            ),
+          PropertiesCard(
+            title: "Order",
+            contentlist: [state.detail.order.toString()],
           ),
-          Card(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-            ),
-            elevation: 2,
-            child: Column(
+          PropertiesCard(
+            title: "Sprites",
+            contentWidget: Column(
               children: [
-                const SizedBox(height: 10),
-                const Text(
-                  "Sprites",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 10),
-                const Divider(
-                  height: 1,
-                  color: Colors.black54,
-                ),
-                const SizedBox(height: 10),
                 _rowMet(state),
-                const SizedBox(height: 10),
               ],
             ),
           ),
-          Card(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-            ),
-            elevation: 2,
-            child: Column(
-              children: [
-                const SizedBox(height: 10),
-                const Text(
-                  "Stats",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 10),
-                const Divider(
-                  height: 1,
-                  color: Colors.black54,
-                ),
-                const SizedBox(height: 10),
-                ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: state.detail.stats!.length,
-                  itemBuilder: (context, index) => Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          state.detail.stats![index].stat!.name
-                              .toString()
-                              .toCapitalized(),
-                          style: Theme.of(context).textTheme.headline6,
-                        ),
-                        const Text(" - "),
-                        Text(
-                          state.detail.stats![index].baseStat.toString(),
-                          style: Theme.of(context).textTheme.headline6,
-                        ),
-                      ]),
-                ),
-                const SizedBox(height: 10),
-              ],
-            ),
+          PropertiesCard(
+            title: "Stats",
+            contentlist: state.detail.stats!
+                .map((e) => "${e.stat?.name ?? ""} - ${e.baseStat}")
+                .toList(),
           ),
-          Card(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-            ),
-            elevation: 2,
-            child: Column(
-              children: [
-                const SizedBox(height: 10),
-                const Text(
-                  "Types",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 10),
-                const Divider(
-                  height: 1,
-                  color: Colors.black54,
-                ),
-                const SizedBox(height: 10),
-                ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: state.detail.types!.length,
-                  itemBuilder: (context, index) => Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (state.detail.types![index].type!.name.toString() ==
-                            "water")
-                          const Icon(Icons.water)
-                        else if (state.detail.types![index].type!.name
-                                .toString() ==
-                            "psychic")
-                          const Icon(Icons.horizontal_split)
-                        else if (state
-                                .detail.types![index].type!.name
-                                .toString() ==
-                            "grass")
-                          const Icon(Icons.grass)
-                        else if (state.detail.types![index].type!.name
-                                .toString() ==
-                            "fire")
-                          const Icon(Icons.local_fire_department)
-                        else if (state.detail.types![index].type!.name
-                                .toString() ==
-                            "poison")
-                          const Icon(Icons.warning)
-                        else if (state.detail.types![index].type!.name
-                                .toString() ==
-                            "flying")
-                          const Icon(Icons.air)
-                        else if (state.detail.types![index].type!.name
-                                .toString() ==
-                            "normal")
-                          const Icon(Icons.developer_mode_outlined)
-                        else if (state.detail.types![index].type!.name
-                                .toString() ==
-                            "bug")
-                          const Icon(Icons.bug_report),
-                        const Text(" - "),
-                        Text(
-                          state.detail.types![index].type!.name
-                              .toString()
-                              .toCapitalized(),
-                          style: Theme.of(context).textTheme.headline6,
-                        ),
-                      ]),
-                ),
-                const SizedBox(height: 10),
-              ],
-            ),
-          ),
-          Card(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-            ),
-            elevation: 2,
-            child: Column(
-              children: [
-                const SizedBox(height: 10),
-                const Text(
-                  "Weight",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 10),
-                const Divider(
-                  height: 1,
-                  color: Colors.black54,
-                ),
-                const SizedBox(height: 10),
+          PropertiesCard(
+            title: "Types",
+            contentWidget: ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: state.detail.types!.length,
+              itemBuilder: (context, index) =>
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                _iconType(state.detail.types![index].type?.name ?? ""),
+                const Text(" - "),
                 Text(
-                  state.detail.weight.toString(),
+                  state.detail.types![index].type!.name
+                      .toString()
+                      .toCapitalized(),
                   style: Theme.of(context).textTheme.headline6,
                 ),
-                const SizedBox(height: 10),
-              ],
+              ]),
             ),
+          ),
+          PropertiesCard(
+            title: "Weight",
+            contentlist: [state.detail.weight.toString()],
           ),
           const SizedBox(height: 30),
         ],
@@ -702,6 +183,85 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen> {
           state.detail.sprites!.frontShiny.toString(),
         ),
       ],
+    );
+  }
+
+  Widget _iconType(String typeName) {
+    if (typeName == "water") {
+      return const Icon(Icons.water);
+    } else if (typeName == "psychic") {
+      return const Icon(Icons.horizontal_split);
+    } else if (typeName == "grass") {
+      return const Icon(Icons.grass);
+    } else if (typeName == "fire") {
+      return const Icon(Icons.local_fire_department);
+    } else if (typeName == "poison") {
+      return const Icon(Icons.warning);
+    } else if (typeName == "flying") {
+      return const Icon(Icons.air);
+    } else if (typeName == "normal") {
+      return const Icon(Icons.developer_mode_outlined);
+    } else if (typeName == "bug") {
+      return const Icon(Icons.bug_report);
+    } else {
+      return const SizedBox();
+    }
+  }
+}
+
+class PropertiesCard extends StatelessWidget {
+  const PropertiesCard({
+    Key? key,
+    required this.title,
+    this.contentlist,
+    this.contentWidget,
+  }) : super(key: key);
+
+  final String title;
+  final List<String>? contentlist;
+  final Widget? contentWidget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      shape: RoundedRectangleBorder(
+        side: BorderSide(
+          color: Theme.of(context).colorScheme.primary,
+        ),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
+      ),
+      elevation: 2,
+      child: Column(
+        children: [
+          const SizedBox(height: 10),
+          Text(
+            title,
+            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 10),
+          const Divider(
+            height: 1,
+            color: Colors.black54,
+          ),
+          const SizedBox(height: 10),
+          if (contentlist != null && contentWidget == null)
+            ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: contentlist!.length > 12 ? 12 : contentlist!.length,
+              itemBuilder: (context, index) => Center(
+                child: Text(
+                  contentlist![index].toTitleCase(),
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+              ),
+            )
+          else
+            contentWidget!,
+          const SizedBox(height: 10),
+        ],
+      ),
     );
   }
 }
