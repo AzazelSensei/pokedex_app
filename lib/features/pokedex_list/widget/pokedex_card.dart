@@ -51,7 +51,7 @@ class PokedexCard extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                       style: Theme.of(context).textTheme.headline6,
-                      result.name ?? ""),
+                      result.name!.toUpperCase()),
                 ),
               ],
             ),

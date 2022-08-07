@@ -13,7 +13,7 @@ class PokedexListScreen extends StatefulWidget {
 }
 
 class _PokedexListScreenState extends State<PokedexListScreen> {
-  final limit = 10;
+  final limit = 500;
   @override
   void initState() {
     super.initState();
@@ -39,7 +39,6 @@ class _PokedexListScreenState extends State<PokedexListScreen> {
                 return PokedexCard(
                   result: state.pokemons[index],
                   index: index + 1,
-                  
                 );
               },
             );
