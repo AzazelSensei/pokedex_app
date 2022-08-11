@@ -7,6 +7,8 @@ import '../../pokedex_list/model/pokedex_list_model.dart';
 import '../cubit/pokedex_detail_cubit.dart';
 import 'package:pokedex_app/core/extension/letter_extension.dart';
 
+import '../widget/properties_card.dart';
+
 class PokedexDetailScreen extends StatefulWidget {
   const PokedexDetailScreen(BuildContext context,
       {Key? key, required this.index, required this.result})
@@ -36,41 +38,46 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen> {
           return Scaffold(
               appBar: AppBar(
                 systemOverlayStyle: const SystemUiOverlayStyle(
-                  // Status bar color
                   statusBarColor: Colors.transparent,
-
-                  // Status bar brightness (optional)
-                  statusBarIconBrightness:
-                      Brightness.dark, // For Android (dark icons)
-                  statusBarBrightness: Brightness.light, // For iOS (dark icons)
+                  statusBarIconBrightness: Brightness.dark,
+                  statusBarBrightness: Brightness.light,
                 ),
                 elevation: 0,
                 centerTitle: true,
                 title: Text(widget.result.name!.toUpperCase()),
               ),
-              body: BlocBuilder<PokedexDetailCubit, PokedexDetailState>(
-                builder: (context, state) {
-                  if (state is PokedexDetailLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (state is PokedexDetailLoaded) {
-                    return _body(state);
-                  } else if (state is PokedexDetailError) {
-                    return const Center(
-                      child: Text('Error'),
-                    );
-                  } else {
-                    return const Center(
-                      child: Text('Unknown state'),
-                    );
-                  }
-                },
-              ));
+              body: _stateRouter,
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {},
+                child: Icon(Icons.arrow_back),
+              ),
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.centerFloat);
         },
       ),
     );
   }
+
+  Widget get _stateRouter =>
+      BlocBuilder<PokedexDetailCubit, PokedexDetailState>(
+        builder: (context, state) {
+          if (state is PokedexDetailLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is PokedexDetailLoaded) {
+            return _body(state);
+          } else if (state is PokedexDetailError) {
+            return const Center(
+              child: Text('Error'),
+            );
+          } else {
+            return const Center(
+              child: Text('Unknown state'),
+            );
+          }
+        },
+      );
 
   Widget _body(PokedexDetailLoaded state) {
     return SingleChildScrollView(
@@ -206,62 +213,5 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen> {
     } else {
       return const SizedBox();
     }
-  }
-}
-
-class PropertiesCard extends StatelessWidget {
-  const PropertiesCard({
-    Key? key,
-    required this.title,
-    this.contentlist,
-    this.contentWidget,
-  }) : super(key: key);
-
-  final String title;
-  final List<String>? contentlist;
-  final Widget? contentWidget;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-      shape: RoundedRectangleBorder(
-        side: BorderSide(
-          color: Theme.of(context).colorScheme.primary,
-        ),
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
-      ),
-      elevation: 2,
-      child: Column(
-        children: [
-          const SizedBox(height: 10),
-          Text(
-            title,
-            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 10),
-          const Divider(
-            height: 1,
-            color: Colors.black54,
-          ),
-          const SizedBox(height: 10),
-          if (contentlist != null && contentWidget == null)
-            ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: contentlist!.length > 12 ? 12 : contentlist!.length,
-              itemBuilder: (context, index) => Center(
-                child: Text(
-                  contentlist![index].toTitleCase(),
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-              ),
-            )
-          else
-            contentWidget!,
-          const SizedBox(height: 10),
-        ],
-      ),
-    );
   }
 }
