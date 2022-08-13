@@ -18,4 +18,6 @@ class PokedexListCubit extends Cubit<PokedexListState> {
       emit(PokedexListError(e.toString()));
     }
   }
+
+  
 }

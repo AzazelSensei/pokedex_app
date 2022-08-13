@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pokedex_app/features/pokedex_list/view/pokedex_list_screen.dart';
 import 'package:pokedex_app/network/endpoint.dart';
 import 'package:pokedex_app/network/pokedex_repository.dart';
@@ -34,6 +35,19 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blueGrey,
+          appBarTheme: const AppBarTheme(
+            elevation: 0,
+            color: Colors.blueGrey,
+            systemOverlayStyle: SystemUiOverlayStyle(
+              // Status bar color
+              statusBarColor: Colors.transparent,
+
+              // Status bar brightness (optional)
+              statusBarIconBrightness:
+                  Brightness.dark, // For Android (dark icons)
+              statusBarBrightness: Brightness.light, // For iO
+            ),
+          ),
         ),
         home: const PokedexListScreen(),
       ),

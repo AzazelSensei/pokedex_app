@@ -49,7 +49,7 @@ class _PokedexDetailScreenState extends State<PokedexDetailScreen> {
               body: _stateRouter,
               floatingActionButton: FloatingActionButton(
                 onPressed: () {},
-                child: Icon(Icons.arrow_back),
+                child: const Icon(Icons.arrow_back),
               ),
               floatingActionButtonLocation:
                   FloatingActionButtonLocation.centerFloat);
