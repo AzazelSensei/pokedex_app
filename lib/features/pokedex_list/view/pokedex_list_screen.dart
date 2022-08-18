@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../cubit/pokedex_list_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,10 +58,8 @@ class _PokedexListScreenState extends State<PokedexListScreen> {
   }
 
   Widget _builder(context, state) {
-    if (state is PokedexListLoading) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
+    if (state is LazyLoadedState<PokedexListCubit?>) {
+      return _listView(state.data!, state.hasReachedMax, state.lazyError);
     } else if (state is PokedexListLoaded) {
       return LazyLoadScrollView(
         onEndOfPage: () {
@@ -85,8 +82,36 @@ class _PokedexListScreenState extends State<PokedexListScreen> {
       );
     } else {
       return const Center(
-        child: Text('Unknown state'),
+        child: CircularProgressIndicator(),
       );
     }
   }
+
+  Widget _listView(state, bool hasReachedMax, bool? lazyError) {
+    isLazyLoad = true;
+    final pokemons = state.pokemons;
+
+    if (pokemons != null && pokemons.isNotEmpty) {
+      return Scrollbar(
+        child: ListView.builder(
+          controller: _scrollController,
+          itemCount: pokemons.length,
+          addAutomaticKeepAlives: true,
+          itemBuilder: (context, index) {
+            return PokedexCard(
+              result: pokemons[index],
+              index: index + 1,
+            );
+          },
+        ),
+      );
+    } else {
+      return const Center(
+        child: Text('No pokemons'),
+      );
+    }
+  }
+
+  Widget get lazyTryAgainBtn =>
+      TextButton(onPressed: () {}, child: const Text('Try again'));
 }
